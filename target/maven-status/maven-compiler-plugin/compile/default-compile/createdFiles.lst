@@ -1,2 +1,2 @@
-Main.class
-Career.class
+com\db\Connect.class
+com\models\Career.class
