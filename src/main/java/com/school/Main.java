@@ -44,7 +44,13 @@ public class Main {
                         Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     break;
-                case 3:
+                case 3: 
+                    try{
+                        connection.readCareer();
+                    }catch (SQLException e) {
+                       e.printStackTrace();
+                    }
+                    
                     break;
                 case 4:
                     try {

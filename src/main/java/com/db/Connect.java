@@ -67,13 +67,15 @@ public class Connect {
         connection.close();
      }
 
-//    //Esto deberia devolver algo
-//    public void readCareer() throws SQLException{
-//        Connection connection = getConnection();
-//        String SQLQuery = "SELECT * FROM carreras";
-//        PreparedStatement st = connection.prepareStatement(SQLQuery);
-//        st.setString("Waiting for Career's.OBJ", SQLQuery);
-//        connection.close();
-//
-//    }
+      //Esto deberia devolver algo
+      public void readCareer() throws SQLException{
+          Connection connection = getConnection();
+          String SQLQuery = "SELECT * FROM carreras";
+          Statement st = connection.createStatement();
+          ResultSet rs = st.executeQuery(SQLQuery);
+          while (rs.next()){
+          System.out.println("Nombre de la Carrera: " + rs.getString("nombre") + "\n" );
+          }
+          connection.close();
+      }
 }
