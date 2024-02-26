@@ -25,8 +25,8 @@ public class Main {
             
             switch (opcion) {
                 case 1:
-                    String name = scanner.nextLine();
-                    try {
+                try {
+                        String name = scanner.nextLine();
                         connection.insertCareer(new Career(name));
                     } catch (SQLException ex) {
                         Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -34,6 +34,15 @@ public class Main {
                     break;
 
                 case 2:
+                try {
+                        System.out.println("Insertar nombre antiguo de la carrera: ");
+                        String oldName = scanner.nextLine();
+                        System.out.println("Ingrese el nombre nuevo de la carrera: ");
+                        String name = scanner.nextLine();
+                        connection.updateCareer(oldName, new Career(name));
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     break;
                 case 3:
                     break;

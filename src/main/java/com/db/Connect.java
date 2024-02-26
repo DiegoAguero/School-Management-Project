@@ -39,13 +39,16 @@ public class Connect {
         System.out.println("Rows inserted: " + rowsInserted);
         connection.close();
     }
-//    public void updateCareer() throws SQLException{
-//        Connection connection = getConnection();
-//        String SQLQuery = "UPDATE carreras SET nombre";
-//        PreparedStatement st = connection.prepareStatement(SQLQuery);
-//        st.setString("Waiting for Career's.OBJ", SQLQuery);
-//        connection.close();
-//    }
+   public void updateCareer(String oldName, Career career) throws SQLException{
+       Connection connection = getConnection();
+       String SQLQuery = "UPDATE carreras SET nombre = ? WHERE nombre = ?";
+       PreparedStatement st = connection.prepareStatement(SQLQuery);
+       st.setString(1, career.getName());
+       st.setString(2, oldName);
+       int rowsInserted = st.executeUpdate();
+       System.out.println("Rows updated: " + rowsInserted);
+       connection.close();
+   }
 //    public void deleteCareer() throws SQLException{
 //        Connection connection = getConnection();
 //        String SQLQuery = "DELETE FROM carreras (nombre) VALUES ?";
