@@ -57,14 +57,15 @@ public class Connect {
        System.out.println("Rows updated: " + rowsInserted);
        connection.close();
    }
-//    public void deleteCareer(Career career) throws SQLException{
-//        Connection connection = getConnection();
-//        String SQLQuery = "DELETE FROM carreras (nombre) VALUES ?";
-//        PreparedStatement st = connection.prepareStatement(SQLQuery);
-//        st.setString("Waiting for Career's.OBJ", SQLQuery);
-//        connection.close();
-//
-//    }
+     public void deleteCareer(Career career) throws SQLException{
+         Connection connection = getConnection();
+         String SQLQuery = "DELETE FROM carreras WHERE nombre = ?";
+         PreparedStatement st = connection.prepareStatement(SQLQuery);
+         st.setString(1, career.getName());
+        int careerDeleted = st.executeUpdate();
+        System.out.println("Career deleted: " + careerDeleted);
+        connection.close();
+     }
 
 //    //Esto deberia devolver algo
 //    public void readCareer() throws SQLException{

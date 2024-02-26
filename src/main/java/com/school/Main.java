@@ -47,6 +47,13 @@ public class Main {
                 case 3:
                     break;
                 case 4:
+                    try {
+                        System.out.println("Ingrese el nombre de la carrera que desea eliminar: ");
+                        String name = scanner.nextLine();
+                        connection.deleteCareer(new Career(name));
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case 5:
                     salir = true;
