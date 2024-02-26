@@ -1,5 +1,7 @@
 package com.db;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.*;
 import java.util.*;
 import com.models.Career;
@@ -10,9 +12,15 @@ public class Connect {
     public Connection getConnection() throws SQLException{
         Connection connection = null;
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost/escuela", "root", "123456");
-        } catch (ClassNotFoundException ex) {
+            Properties props = new Properties();
+            props.load(new FileInputStream("config/db.properties"));
+            String DRIVER = props.getProperty("DRIVER");
+            String URL = props.getProperty("URL");
+            String USER = props.getProperty("USER");
+            String PASSWORD = props.getProperty("PASSWORD");
+            Class.forName(DRIVER);
+            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        } catch (ClassNotFoundException | IOException ex) {
             Logger.getLogger(Connect.class.getName()).log(Level.SEVERE, null, ex);
         }
         return connection;
@@ -49,7 +57,7 @@ public class Connect {
        System.out.println("Rows updated: " + rowsInserted);
        connection.close();
    }
-//    public void deleteCareer() throws SQLException{
+//    public void deleteCareer(Career career) throws SQLException{
 //        Connection connection = getConnection();
 //        String SQLQuery = "DELETE FROM carreras (nombre) VALUES ?";
 //        PreparedStatement st = connection.prepareStatement(SQLQuery);
