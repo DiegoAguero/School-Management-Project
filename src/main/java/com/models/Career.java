@@ -8,14 +8,15 @@ import java.util.*;
 
 /**
  *
- * @author Mati
+ * @author Diego & Anas
  */
 public class Career {
     private String name;
 
     // Constructor
     public Career(String name) {
-        this.name = name;
+        this.setName(name);
+        // this.name = name;
     }
 
     // Método para obtener el nombre de la carrera

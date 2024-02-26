@@ -1,8 +1,8 @@
 package com.school;
 import java.util.ArrayList;
 import java.util.Scanner;
- import com.models.Career;
- import com.db.Connect;
+import com.models.Career;
+import com.db.Connect;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,8 +11,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean salir = false;
-        Connect connect = null;
-        Career career;
+        Connect connection = new Connect();
         while (!salir) {
             System.out.println("1. Añadir carrera");
             System.out.println("2. Actualizar carrera");
@@ -28,7 +27,7 @@ public class Main {
                 case 1:
                     String name = scanner.nextLine();
                     try {
-                        connect.insertCareer(new Career(name));
+                        connection.insertCareer(new Career(name));
                     } catch (SQLException ex) {
                         Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                     }
