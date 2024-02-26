@@ -14,8 +14,8 @@ public class Connect {
         try {
             Properties props = new Properties();
             props.load(new FileInputStream("config/db.properties"));
-            String DRIVER = props.getProperty("DRIVER");
             String URL = props.getProperty("URL");
+            String DRIVER = props.getProperty("DRIVER");
             String USER = props.getProperty("USER");
             String PASSWORD = props.getProperty("PASSWORD");
             Class.forName(DRIVER);
