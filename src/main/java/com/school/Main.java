@@ -28,20 +28,20 @@ public class Main {
                 try {
                         String name = scanner.nextLine();
                         connection.insertCareer(new Career(name));
-                    } catch (SQLException ex) {
-                        Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
                     }
                     break;
 
                 case 2:
-                try {
+                    try {
                         System.out.println("Insertar nombre antiguo de la carrera: ");
                         String oldName = scanner.nextLine();
                         System.out.println("Ingrese el nombre nuevo de la carrera: ");
                         String name = scanner.nextLine();
                         connection.updateCareer(oldName, new Career(name));
-                    } catch (SQLException ex) {
-                        Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
                     }
                     break;
                 case 3: 
@@ -50,8 +50,6 @@ public class Main {
                     }catch (SQLException e) {
                        e.printStackTrace();
                     }
-                    
-                    break;
                 case 4:
                     try {
                         System.out.println("Ingrese el nombre de la carrera que desea eliminar: ");
