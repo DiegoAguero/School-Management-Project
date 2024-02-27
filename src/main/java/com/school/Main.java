@@ -51,7 +51,6 @@ public class Main {
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
-                    break;
                 case 4:
                     try {
                         System.out.println("Ingrese el nombre de la carrera que desea eliminar: ");
