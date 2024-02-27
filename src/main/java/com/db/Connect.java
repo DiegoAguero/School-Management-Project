@@ -36,18 +36,16 @@ public class Connect {
         return connection;
     }
 
-    //Añadir objeto carrera
     public void insertCareer(Career career) throws SQLException{
         Connection connection = getConnection();
         String SQLQuery = "INSERT INTO carreras (nombre) VALUES (?)";
         PreparedStatement st = connection.prepareStatement(SQLQuery);
-        
         st.setString(1, career.getName());
         int rowsInserted = st.executeUpdate();
         System.out.println("Rows inserted: " + rowsInserted);
         connection.close();
     }
-   public void updateCareer(String oldName, Career career) throws SQLException{
+    public void updateCareer(String oldName, Career career) throws SQLException{
        Connection connection = getConnection();
        String SQLQuery = "UPDATE carreras SET nombre = ? WHERE nombre = ?";
        PreparedStatement st = connection.prepareStatement(SQLQuery);
@@ -56,24 +54,25 @@ public class Connect {
        int rowsInserted = st.executeUpdate();
        System.out.println("Rows updated: " + rowsInserted);
        connection.close();
-   }
-     public void deleteCareer(Career career) throws SQLException{
-         Connection connection = getConnection();
-         String SQLQuery = "DELETE FROM carreras WHERE nombre = ?";
-         PreparedStatement st = connection.prepareStatement(SQLQuery);
-         st.setString(1, career.getName());
+    }
+    public void deleteCareer(Career career) throws SQLException{
+        Connection connection = getConnection();
+        String SQLQuery = "DELETE FROM carreras WHERE nombre = ?";
+        PreparedStatement st = connection.prepareStatement(SQLQuery);
+        st.setString(1, career.getName());
         int careerDeleted = st.executeUpdate();
         System.out.println("Career deleted: " + careerDeleted);
         connection.close();
-     }
-
-//    //Esto deberia devolver algo
-//    public void readCareer() throws SQLException{
-//        Connection connection = getConnection();
-//        String SQLQuery = "SELECT * FROM carreras";
-//        PreparedStatement st = connection.prepareStatement(SQLQuery);
-//        st.setString("Waiting for Career's.OBJ", SQLQuery);
-//        connection.close();
-//
-//    }
+    }
+    public void readCareer() throws SQLException{
+        Connection connection = getConnection();
+        String SQLQuery = "SELECT * FROM carreras";
+        Statement st = connection.createStatement();
+        ResultSet rs = st.executeQuery(SQLQuery);
+        while (rs.next()) {
+            String nameOfCareer = rs.getString("nombre");
+            System.out.println(nameOfCareer + "\n");
+        }
+        connection.close();
+    }
 }
