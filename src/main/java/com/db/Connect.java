@@ -4,12 +4,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
 import java.util.*;
-import com.models.Career;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 public class Connect {
     public Connect(){}
-    public Connection getConnection() throws SQLException{
+    public static Connection getConnection() throws SQLException{
         Connection connection = null;
         try {
             Properties props = new Properties();
@@ -36,43 +35,5 @@ public class Connect {
         return connection;
     }
 
-    public void insertCareer(Career career) throws SQLException{
-        Connection connection = getConnection();
-        String SQLQuery = "INSERT INTO carreras (nombre) VALUES (?)";
-        PreparedStatement st = connection.prepareStatement(SQLQuery);
-        st.setString(1, career.getName());
-        int rowsInserted = st.executeUpdate();
-        System.out.println("Rows inserted: " + rowsInserted);
-        connection.close();
-    }
-    public void updateCareer(String oldName, Career career) throws SQLException{
-       Connection connection = getConnection();
-       String SQLQuery = "UPDATE carreras SET nombre = ? WHERE nombre = ?";
-       PreparedStatement st = connection.prepareStatement(SQLQuery);
-       st.setString(1, career.getName());
-       st.setString(2, oldName);
-       int rowsInserted = st.executeUpdate();
-       System.out.println("Rows updated: " + rowsInserted);
-       connection.close();
-    }
-    public void deleteCareer(Career career) throws SQLException{
-        Connection connection = getConnection();
-        String SQLQuery = "DELETE FROM carreras WHERE nombre = ?";
-        PreparedStatement st = connection.prepareStatement(SQLQuery);
-        st.setString(1, career.getName());
-        int careerDeleted = st.executeUpdate();
-        System.out.println("Career deleted: " + careerDeleted);
-        connection.close();
-    }
-    public void readCareer() throws SQLException{
-        Connection connection = getConnection();
-        String SQLQuery = "SELECT * FROM carreras";
-        Statement st = connection.createStatement();
-        ResultSet rs = st.executeQuery(SQLQuery);
-        while (rs.next()) {
-            String nameOfCareer = rs.getString("nombre");
-            System.out.println(nameOfCareer + "\n");
-        }
-        connection.close();
-    }
+
 }

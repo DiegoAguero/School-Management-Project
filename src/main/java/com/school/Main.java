@@ -1,17 +1,18 @@
 package com.school;
-import java.util.ArrayList;
 import java.util.Scanner;
 import com.models.Career;
+import com.db.CareerQuery;
 import com.db.Connect;
+
+import java.sql.*;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 public class Main {
     // private static ArrayList<String> elementos = new ArrayList<>();
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException{
         Scanner scanner = new Scanner(System.in);
         boolean salir = false;
-        Connect connection = new Connect();
+        Connection connection = Connect.getConnection();
+        CareerQuery careerQuery = new CareerQuery();
         while (!salir) {
             System.out.println("1. Añadir carrera");
             System.out.println("2. Actualizar carrera");
@@ -27,7 +28,7 @@ public class Main {
                 case 1:
                 try {
                         String name = scanner.nextLine();
-                        connection.insertCareer(new Career(name));
+                        careerQuery.insertCareer(new Career(name), connection);
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
@@ -39,14 +40,14 @@ public class Main {
                         String oldName = scanner.nextLine();
                         System.out.println("Ingrese el nombre nuevo de la carrera: ");
                         String name = scanner.nextLine();
-                        connection.updateCareer(oldName, new Career(name));
+                        careerQuery.updateCareer(oldName, new Career(name), connection);
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
                     break;
                 case 3:
                     try {
-                        connection.readCareer();
+                        careerQuery.readCareer(connection);
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
@@ -55,12 +56,13 @@ public class Main {
                     try {
                         System.out.println("Ingrese el nombre de la carrera que desea eliminar: ");
                         String name = scanner.nextLine();
-                        connection.deleteCareer(new Career(name));
+                        careerQuery.deleteCareer(new Career(name), connection);
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
                     break;
                 case 5:
+                    connection.close();
                     salir = true;
                     break;
                 default:
